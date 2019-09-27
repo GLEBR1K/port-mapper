@@ -11,5 +11,8 @@
   "license": "ISC",
   "devDependencies": {
     "eslint": "^6.4.0"
+  },
+  "dependencies": {
+    "cli-progress": "^3.1.0"
   }
 }
