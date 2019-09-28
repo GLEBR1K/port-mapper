@@ -1,10 +1,13 @@
 const { table, getBorderCharacters } = require('table');
+const { getService } = require('port-numbers');
 require('colors');
 
 const header = [
   '#'.bold, 
-  'Port'.bold, 
-  'Status'.bold
+  'Port'.bold,
+  'Service'.bold,
+  'Status'.bold,
+  'Desciption'.bold
 ];
 
 const config = {
@@ -20,10 +23,14 @@ module.exports = function(data) {
   var result = [header];
   
   data.forEach(function(x, i) {
+    var info = getService(x.port) || {};
+
     result.push([
       i + 1, 
       x.port, 
-      (x.status ? ' Open '.bgGreen : ' Closed '.bgRed).black
+      info.name,
+      (x.status ? ' Open '.bgGreen : ' Closed '.bgRed).black,
+      info.description
     ]);
   });
 
