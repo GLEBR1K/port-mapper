@@ -22,7 +22,7 @@ module.exports = class Mapper {
     var length = self.ports.length;
 
     if (before instanceof Function) {
-      before(length);
+      before(this.ip, this.ports);
     }
 
     var chain = this.ports.map(function(port) {

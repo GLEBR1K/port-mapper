@@ -1,13 +1,22 @@
 const progress = require('cli-progress');
 
-const bar = new progress.SingleBar({}, progress.Presets.shades_classic);
+const bar = new progress.SingleBar({
+  format: 'Processing [{bar}] {percentage}% | {value}/{total}',
+  fps: 1,
+  barsize: 100,
+  hideCursor: true
+});
 
 module.exports = {
   bar: bar,
 
-  beforeCallback: function(length) {
-    console.log(`Processing ${length} entries...`);
-    bar.start(length);
+  beforeCallback: function(ip, ports) {
+    console.clear();
+    console.log(`Target IP: ${ip}`);
+    console.log(`Ports: ${ports.join(', ')}`);
+    console.log();
+
+    bar.start(ports.length);
   },
 
   stepCallback: function(data, i) {
