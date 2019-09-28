@@ -4,13 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "eslint": "^6.4.0"
+    "eslint": "^6.4.0",
+    "jest": "^24.9.0"
   },
   "dependencies": {
     "cli-progress": "^3.1.0",
