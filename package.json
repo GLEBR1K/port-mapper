@@ -13,6 +13,8 @@
     "eslint": "^6.4.0"
   },
   "dependencies": {
-    "cli-progress": "^3.1.0"
+    "cli-progress": "^3.1.0",
+    "commander": "^3.0.2",
+    "parse-numeric-range": "0.0.2"
   }
 }

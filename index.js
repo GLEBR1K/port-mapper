@@ -1,13 +1,24 @@
+const cmd = require('commander');
+const range = require('parse-numeric-range');
 const Mapper = require('./src/mapper');
+const { beforeCallback, stepCallback, afterCallback } = require('./src/bar');
 
-var ports = [];
-for (let index = 1; index < 1000; index++) {
-  ports.push(index);    
+cmd
+  .arguments('<ip> <ports>')
+  .option('-o, --open', 'open only')
+  .action(invokeMapper);
+
+cmd.parse(process.argv);
+
+function invokeMapper(ip, ports, options) {
+  ports = range.parse(ports);
+
+  const mapper = new Mapper(ip, ports);
+
+  mapper.invoke(beforeCallback, stepCallback, afterCallback).then(function (results) {
+    console.table(results.filter(function (x) {
+      return !options.open || x.status;
+    }));
+  });
 }
-const m = new Mapper('127.0.0.1', ports);
 
-m.invoke().then(function(results) {
-  console.table(results.filter(function(x) { 
-    return x.status; 
-  }));
-});
