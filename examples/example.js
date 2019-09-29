@@ -9,8 +9,7 @@ server
   .run(localhost, desiredPorts)
   .then(function(serverInfo) {
     const mapper = new Mapper(serverInfo.host, [serverInfo.port]);
-    mapper.invoke().then(function(results) {
-      console.log(results);
+    mapper.invoke().then(function() {
       serverInfo.server.close();
     });
   });

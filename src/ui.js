@@ -1,4 +1,5 @@
 const progress = require('cli-progress');
+const table = require('./table');
 require('colors');
 
 const bar = new progress.SingleBar({
@@ -33,8 +34,10 @@ module.exports = {
     bar.update(i);
   },
 
-  afterCallback: function() {
+  afterCallback: function(results) {
     bar.stop();
     console.log();
+
+    console.log(table(results));
   }
 };

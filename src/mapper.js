@@ -1,4 +1,5 @@
 const { isIPv4, Socket } = require('net');
+const { beforeCallback, stepCallback, afterCallback } = require('./ui');
 
 module.exports = class Mapper {
   constructor(host, ports) {
@@ -15,35 +16,33 @@ module.exports = class Mapper {
     }
   }
 
-  invoke(before, progress, after) {
+  invoke(options) {
     const self = this;
     var promise;
     var i = 0;
     var length = self.ports.length;
+    options = options || {};
 
-    if (before instanceof Function) {
-      before(this.host, this.ports);
-    }
+    beforeCallback(this.host, this.ports);
 
     var chain = this.ports.map(function(port) {
       return mapPortAsync(self.host, port)
         .then(function(result) {
-          if (progress instanceof Function) {
-            progress(result, ++i, length);
-          }
-          
+          stepCallback(result, ++i, length);
           return result;
         });
     });
 
     promise = Promise.all(chain);
 
-    if (after instanceof Function) {
-      promise = promise.then(function(results) { 
-        after(results); 
-        return results; 
+    promise.then(function(results) { 
+      results = results.filter(function (x) {
+        return !options.open || x.status;
       });
-    }
+
+      afterCallback(results); 
+      return results; 
+    });
 
     return promise;
   }
