@@ -46,14 +46,19 @@ $ port-mapper 127.0.0.1 0-1023 --json
 ## Build from source
 
 ```bash
+# clone repository
 $ git clone https://github.com/GLEBR1K/port-mapper.git
+
+# go into the source folder
 $ cd port-mapper
 
+# build for windows
 $ npm run build:win 
-# or
+# or linux
 $ npm run build:linux
-# or
+# or mac
 $ npm run build:mac
 
-$ ./build/port-mapper
+# executable files placed into build folder
+$ ls build/
 ```

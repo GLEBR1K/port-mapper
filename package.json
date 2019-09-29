@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "npm run build:win && npm run build:linux && npm run build:mac",
-    "build:win": "nexe index.js -t windows-x32 -o build/port-mapper-win.exe",
-    "build:linux": "nexe index.js -t linux-x32 -o build/port-mapper-linux",
-    "build:mac": "nexe index.js -t mac-x64 -o build/port-mapper-mac.app",
+    "build:win": "nexe index.js -t windows-x32 -o build/windows/port-mapper.exe",
+    "build:linux": "nexe index.js -t linux-x32 -o build/linux/port-mapper",
+    "build:mac": "nexe index.js -t mac-x64 -o build/mac/port-mapper.app",
     "test": "jest"
   },
   "keywords": [],
