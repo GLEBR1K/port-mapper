@@ -1,6 +1,11 @@
 const { isIPv4, Socket } = require('net');
 const { beforeCallback, stepCallback, afterCallback } = require('./ui');
 
+const defaults = {
+  open: false,
+  silent: false
+};
+
 module.exports = class Mapper {
   constructor(host, ports) {
     if (isIPv4(host)) {
@@ -21,14 +26,20 @@ module.exports = class Mapper {
     var promise;
     var i = 0;
     var length = self.ports.length;
-    options = options || {};
+    options = options || defaults;
 
-    beforeCallback(this.host, this.ports);
+    if (!options.silent)
+    {
+      beforeCallback(this.host, this.ports);
+    }
 
     var chain = this.ports.map(function(port) {
       return mapPortAsync(self.host, port)
         .then(function(result) {
-          stepCallback(result, ++i, length);
+          if (!options.silent)
+          {
+            stepCallback(result, ++i, length);
+          }
           return result;
         });
     });
@@ -40,7 +51,11 @@ module.exports = class Mapper {
         return !options.open || x.status;
       });
 
-      afterCallback(results); 
+      if (!options.silent)
+      {
+        afterCallback(results); 
+      }
+      
       return results; 
     });
 
