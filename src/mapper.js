@@ -46,7 +46,7 @@ module.exports = class Mapper {
 
     promise = Promise.all(chain);
 
-    promise.then(function(results) { 
+    promise = promise.then(function(results) { 
       results = results.filter(function (x) {
         return !options.open || x.status;
       });

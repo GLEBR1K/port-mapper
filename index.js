@@ -6,14 +6,23 @@ const package = require('./package.json');
 cmd
   .arguments('<host> <ports>')
   .option('-o, --open', 'open only')
+  .option('-j, --json', 'json output')
   .action(invokeMapper);
 
 cmd.version(package.version);
 
 cmd.parse(process.argv);
 
-function invokeMapper(host, ports, options) {
+function invokeMapper(host, ports, args) {
+  const options = {
+    open: args.open,
+    silent: args.json
+  };
   ports = range.parse(ports);
   const mapper = new Mapper(host, ports);
-  mapper.invoke(options);
+  mapper.invoke(options).then(function(results) {
+    if (args.json) {
+      console.log(results);
+    }
+  });
 }
