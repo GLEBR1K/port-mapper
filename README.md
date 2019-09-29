@@ -2,6 +2,8 @@
 
 This is a port mapper console utility written using JavaScript (NodeJS) as university lab project.
 
+<p align="center"><img src="/docs/demo.gif?raw=true"/></p>
+
 ## Basic usage
 
 Help message:
