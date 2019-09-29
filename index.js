@@ -5,7 +5,7 @@ const package = require('./package.json');
 
 cmd
   .arguments('<host> <ports>')
-  .option('-o, --open', 'open only')
+  .option('-o, --open', 'filter open ports')
   .option('-j, --json', 'json output')
   .action(invokeMapper);
 
