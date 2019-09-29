@@ -6,7 +6,7 @@ const port = 5000;
 
 it(`map open ${port}`, function() {
   return expect(server.run(host, port).then(function(serverInfo) {
-    const mapper = new Mapper(serverInfo.ip, [serverInfo.port]);
+    const mapper = new Mapper(serverInfo.host, [serverInfo.port]);
     return mapper.invoke().then(function(results) {
       serverInfo.server.close();
       return results;

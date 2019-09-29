@@ -7,7 +7,7 @@ function runServer(host, port) {
     server.listen(port, host, function() {
       resolve({
         server: server, 
-        ip: host, 
+        host: host, 
         port: port
       });
     });

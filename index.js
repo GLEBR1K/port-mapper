@@ -5,16 +5,16 @@ const { beforeCallback, stepCallback, afterCallback } = require('./src/bar');
 const table = require('./src/table');
 
 cmd
-  .arguments('<ip> <ports>')
+  .arguments('<host> <ports>')
   .option('-o, --open', 'open only')
   .action(invokeMapper);
 
 cmd.parse(process.argv);
 
-function invokeMapper(ip, ports, options) {
+function invokeMapper(host, ports, options) {
   ports = range.parse(ports);
 
-  const mapper = new Mapper(ip, ports);
+  const mapper = new Mapper(host, ports);
 
   mapper.invoke(beforeCallback, stepCallback, afterCallback).then(function (results) {
     results = results.filter(function (x) {

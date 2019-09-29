@@ -1,11 +1,11 @@
 const { isIPv4, Socket } = require('net');
 
 module.exports = class Mapper {
-  constructor(ip, ports) {
-    if (isIPv4(ip)) {
-      this.ip = ip;
+  constructor(host, ports) {
+    if (isIPv4(host)) {
+      this.host = host;
     } else {
-      throw new TypeError(`Invalid IP address: "${ip}".`);
+      throw new TypeError(`Invalid host IP address: "${host}".`);
     }
 
     if (ports instanceof Array) {
@@ -22,11 +22,11 @@ module.exports = class Mapper {
     var length = self.ports.length;
 
     if (before instanceof Function) {
-      before(this.ip, this.ports);
+      before(this.host, this.ports);
     }
 
     var chain = this.ports.map(function(port) {
-      return mapPortAsync(self.ip, port)
+      return mapPortAsync(self.host, port)
         .then(function(result) {
           if (progress instanceof Function) {
             progress(result, ++i, length);
@@ -49,7 +49,7 @@ module.exports = class Mapper {
   }
 };
 
-function mapPortAsync(ip, port) {
+function mapPortAsync(host, port) {
   const s = new Socket();
   return new Promise(function(resolve) {
 
@@ -59,6 +59,6 @@ function mapPortAsync(ip, port) {
     }).on('error', function () {
       s.destroy(); 
       resolve({ port: port, status: false});
-    }).connect(port, ip);
+    }).connect(port, host);
   });
 }

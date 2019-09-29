@@ -11,13 +11,13 @@ const bar = new progress.SingleBar({
 module.exports = {
   bar: bar,
 
-  beforeCallback: function(ip, ports) {
+  beforeCallback: function(host, ports) {
     console.clear();
 
     console.log('PORT MAPPER v1.0'.underline.green);
     console.log();
 
-    console.log(`Target:\t${ip.green}`);
+    console.log(`Host:\t${host.green}`);
 
     if (ports.length > 10) {
       console.log('Ports:\t' + `${ports.slice(0, 10).join(', ')}... (+ ${ports.length - 10})`.green);
