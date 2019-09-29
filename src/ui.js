@@ -1,5 +1,6 @@
 const progress = require('cli-progress');
 const table = require('./table');
+const package = require('../package.json');
 require('colors');
 
 const bar = new progress.SingleBar({
@@ -15,7 +16,7 @@ module.exports = {
   beforeCallback: function(host, ports) {
     console.clear();
 
-    console.log('PORT MAPPER v1.0'.underline.green);
+    console.log(`PORT MAPPER v${package.version}`.underline.green);
     console.log();
 
     console.log(`Host:\t${host.green}`);
