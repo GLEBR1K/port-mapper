@@ -4,6 +4,7 @@ const Mapper = require('./src/mapper');
 const package = require('./package.json');
 
 cmd
+  .name(package.name)
   .arguments('<host> <ports>')
   .option('-o, --open', 'filter open ports')
   .option('-j, --json', 'json output')
