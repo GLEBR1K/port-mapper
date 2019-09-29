@@ -9,7 +9,7 @@ cmd
   .option('-j, --json', 'json output')
   .action(invokeMapper);
 
-cmd.version(package.version);
+cmd.version(package.version, '-v, --version');
 
 cmd.parse(process.argv);
 
